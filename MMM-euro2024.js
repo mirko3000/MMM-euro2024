@@ -73,79 +73,36 @@ Module.register('MMM-euro2024', {
     table.classList.add('xsmall', 'MMM-euro2024-table');
     wrapper.appendChild(table);
 
+    var dateCount = 0;
     this.fixtures.forEach(f => {
-      const tr = document.createElement('tr');
-      tr.appendChild(buildTD(new Date(f.date).toLocaleDateString(), 'MMM-euro2024-date', 7));
-      table.appendChild(tr)
-
-      f.games.forEach(m => {
-        const tr1 = document.createElement('tr');
-        const time = new Date(m.utcDate).toLocaleTimeString()
-        const group = m.group
-        tr1.appendChild(buildTD(time + " " + group, [], 7));
-        tr1.classList.add('MMM-euro2024-' + m.status, 'MMM-euro2024-time-group')
-        table.appendChild(tr1)
-
+      if (dateCount < 3) {
+        dateCount++;
         const tr = document.createElement('tr');
-        tr.appendChild(buildTD(m.homeTeam.name, 'MMM-euro2024-homeTeam'));
-        tr.appendChild(buildTDForFlag(m.homeTeam.flag, 'MMM-euro2024-flag'));
-        tr.appendChild(buildTD(m.score.fullTime.homeTeam, 'MMM-euro2024-score'));
-        tr.appendChild(buildTD('-'));
-        tr.appendChild(buildTD(m.score.fullTime.awayTeam, 'MMM-euro2024-score'));
-        tr.appendChild(buildTDForFlag(m.awayTeam.flag, 'MMM-euro2024-flag'));
-        tr.appendChild(buildTD(m.awayTeam.name, 'MMM-euro2024-awayTeam'));
+        tr.appendChild(buildTD(new Date(f.date).toLocaleDateString(), 'MMM-euro2024-date', 7));
         table.appendChild(tr)
 
-        tr.classList.add('MMM-euro2024-' + m.status)
-      });
-    });
+        f.games.forEach(m => {
+          const tr1 = document.createElement('tr');
+          const time = new Date(m.utcDate).toLocaleTimeString()
+          const group = m.group
+          tr1.appendChild(buildTD(time + " " + group, [], 7));
+          tr1.classList.add('MMM-euro2024-' + m.status, 'MMM-euro2024-time-group')
+          table.appendChild(tr1)
 
-    // FOOTER --
-    const p_footer = document.createElement('footer');
-    p_footer.classList.add('MMM-euro2024-footer');
-    wrapper.appendChild(p_footer);
+          const tr = document.createElement('tr');
+          tr.appendChild(buildTD(m.homeTeam.name, 'MMM-euro2024-homeTeam'));
+          tr.appendChild(buildTDForFlag(m.homeTeam.flag, 'MMM-euro2024-flag'));
+          tr.appendChild(buildTD(m.score.fullTime.homeTeam, 'MMM-euro2024-score'));
+          tr.appendChild(buildTD('-'));
+          tr.appendChild(buildTD(m.score.fullTime.awayTeam, 'MMM-euro2024-score'));
+          tr.appendChild(buildTDForFlag(m.awayTeam.flag, 'MMM-euro2024-flag'));
+          tr.appendChild(buildTD(m.awayTeam.name, 'MMM-euro2024-awayTeam'));
+          table.appendChild(tr)
 
-    const spanForFooter = (label, className) => {
-      const span_footer = document.createElement('span');
-      span_footer.classList.add(className);
-      const span_footer_text = document.createTextNode(label);
-      span_footer.appendChild(span_footer_text);
-      return span_footer;
-    };
-
-    if (this.nextUpdate && this.nextUpdate[1]) {
-      const p_footer_left = document.createElement('p');
-      p_footer_left.classList.add('MMM-euro2024-footer-left');
-      p_footer.appendChild(p_footer_left);
-      p_footer_left.appendChild(
-        spanForFooter(
-          'Next API request: ' + new Date(this.nextUpdate[1]).toLocaleString() + ' powered by https://api.football-data.org',
-          'MMM-euro2024-footer-dates'
-        )
-      );
-    }
-
-    if (this.version && 'local' in this.version && 'remote' in this.version) {
-      const p_footer_right = document.createElement('p');
-      p_footer_right.classList.add('MMM-euro2024-footer-right');
-      p_footer.appendChild(p_footer_right);
-      p_footer_right.appendChild(
-        spanForFooter(
-          'installed version:' + this.version.local,
-          'MMM-euro2024-footer-version'
-        )
-      );
-      if (this.version.local !== this.version.remote) {
-        p_footer_right.appendChild(spanForFooter(' '));
-        p_footer_right.appendChild(
-          spanForFooter(
-            'latest version:' + this.version.remote,
-            'MMM-euro2024-footer-version'
-          )
-        );
-        p_footer_right.classList.add('MMM-euro2024-footer-version-update');
+          tr.classList.add('MMM-euro2024-' + m.status)
+        });
       }
-    }
+    });
 
 
     return wrapper;
