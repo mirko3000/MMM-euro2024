@@ -8,7 +8,7 @@
 }
 
 .MMM-euro2024-FINISHED {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .MMM-euro2024-FINISHED .MMM-euro2024-score {
@@ -28,7 +28,7 @@
 
 .MMM-euro2024-SCHEDULED,
 .MMM-euro2024-TIMED {
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 .MMM-euro2024-awayTeam {
