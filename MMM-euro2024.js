@@ -92,9 +92,9 @@ Module.register('MMM-euro2024', {
           const tr = document.createElement('tr');
           tr.appendChild(buildTD(m.homeTeam.name, 'MMM-euro2024-homeTeam'));
           tr.appendChild(buildTDForFlag(m.homeTeam.flag, 'MMM-euro2024-flag'));
-          tr.appendChild(buildTD(m.score.fullTime.homeTeam, 'MMM-euro2024-score'));
+          tr.appendChild(buildTD(m.score.fullTime.home, 'MMM-euro2024-score'));
           tr.appendChild(buildTD('-'));
-          tr.appendChild(buildTD(m.score.fullTime.awayTeam, 'MMM-euro2024-score'));
+          tr.appendChild(buildTD(m.score.fullTime.away, 'MMM-euro2024-score'));
           tr.appendChild(buildTDForFlag(m.awayTeam.flag, 'MMM-euro2024-flag'));
           tr.appendChild(buildTD(m.awayTeam.name, 'MMM-euro2024-awayTeam'));
           table.appendChild(tr)
